@@ -1,0 +1,24 @@
+int checkMirrorTree(int n, int e, int a[], int b[]) {
+        map<int,stack<int>> m;
+        
+        int i=0;
+        int k=0;
+        while(i<e)
+        {
+            m[a[k]].push(a[k+1]);
+            k+=2;
+            i++;
+        }
+        i=0;
+        k=0;
+        while(i<e)
+        {
+            if(m[b[k]].top()!=b[k+1])
+            return false;
+            
+            m[b[k]].pop();
+            k+=2;
+            i++;
+        }
+        return true;
+    }

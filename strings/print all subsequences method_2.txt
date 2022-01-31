@@ -1,0 +1,19 @@
+vector<string> subsequences(string str)
+{
+    
+    vector<string> ans;
+    for(int i=1;i<(1<<str.size());i++)
+    {
+        string x="";
+        for(int j=0;j<str.size();j++)
+        {
+            if((i)&(1<<j))
+            {
+                x+=str[j];
+            }
+        }
+        ans.push_back(x);
+    }
+    return ans;
+   
+}

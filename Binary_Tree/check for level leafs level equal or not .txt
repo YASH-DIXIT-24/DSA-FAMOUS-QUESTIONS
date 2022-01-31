@@ -1,0 +1,29 @@
+int height(Node* root)
+    {
+        if(!root)
+        return 0;
+        
+        int l=1+height(root->left);
+        int h=1+height(root->right);
+        
+        return max(l,h);
+        
+    }
+    bool util(Node* root,int p)
+    {
+        if(!root)
+        return true;
+        
+        p--;
+        if(!root->left && !root->right)
+        return p==0;
+        
+        return util(root->left,p) && util(root->right,p);
+    }
+    bool check(Node *root)
+    {
+        if(!root)
+        return true;
+        int p=height(root);
+        return util(root,p);
+    }

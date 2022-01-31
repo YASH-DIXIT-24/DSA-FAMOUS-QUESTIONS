@@ -1,0 +1,29 @@
+Node *dll(Node* root,Node* &head,Node* &tail)
+{
+    if(!root)
+    return NULL;
+    
+    if(!root->left && !root->right)
+    {
+        if(!head)
+        head=root;
+        
+        else
+        {
+            tail->right=root;
+            root->left=tail;
+        }
+        
+        tail=root;
+        return NULL;
+    }
+    root->left=dll(root->left,head,tail);
+    root->right=dll(root->right,head,tail);
+    return root;
+}
+Node * convertToDLL(Node *root)
+{
+    Node* head=NULL,*tail=NULL;
+    Node *temp=dll(root,head,tail);
+    return head;
+}

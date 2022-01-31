@@ -1,0 +1,35 @@
+void inorder(Node *&root, vector<int> &in)
+    {
+        if(!root)
+        return;
+        
+        inorder(root->left,in);
+        
+        in.push_back(root->data);
+        
+        inorder(root->right,in);
+    }
+    void util(Node *root,vector<int> in,int &p)
+    {
+    if(!root)
+    return;
+    
+    util(root->left,in,p);
+    
+    root->data=in[p];
+    p++;
+    
+    util(root->right,in,p);
+    
+    }
+    Node *binaryTreeToBST (Node *root)
+    {
+        vector<int> in;
+        inorder(root,in);
+
+        sort(in.begin(),in.end());
+        int p=0;
+        util(root,in,p);
+        return root;
+        
+    }

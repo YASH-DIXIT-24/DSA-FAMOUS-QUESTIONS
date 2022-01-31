@@ -1,0 +1,40 @@
+Node* util(Node* root)
+{
+    if(!root)
+    return root;
+    
+    if(!root->right)
+    return root;
+    
+    return util(root->right);
+}
+Node *deleteNode(Node *root, int x) {
+     if(!root)
+    return NULL;
+    
+    if(root->data==x)
+    {
+      if(!root->right && !root->left)
+          return NULL;
+          
+      else if(root->right && root->left)
+      {
+          Node *temp=util(root->left);
+          root->data=temp->data;
+          root->left=deleteNode(root->left,temp->data);
+          return root;
+      }
+      if(root->left)
+      return root->left;
+      
+      if(root->right)
+      return root->right;
+    }
+    else if(x<root->data)
+    root->left=deleteNode(root->left,x);
+    
+    else
+    root->right=deleteNode(root->right,x);
+    
+    return root;
+}

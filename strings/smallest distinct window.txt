@@ -1,0 +1,46 @@
+string findSubString(string s)
+    {
+        int freq[256]={0};
+        int n=s.size();
+        string p="";
+        for(int i=0;i<n;i++)
+        {
+            freq[s[i]-'A']++;
+            if(freq[s[i]-'A']==1)
+            p+=s[i];
+        }
+        
+        int m=p.size();
+        int count[256]={0};
+        int start=0;
+        int ans=INT_MAX;
+        int k=0;
+        int start_index=0;
+        for(int i=0;i<n;i++)
+        {
+            count[s[i]-'A']++;
+            if(count[p[k]-'A']>=1)
+            k++;
+            
+            if(m==k)
+            {
+                while(count[s[start]-'A']>1)
+                {
+                    if(count[s[start]-'A']>1)
+                    {
+                        count[s[start]-'A']--;
+                        start++;
+                    }
+                }
+            
+            
+            int min_len=i-start+1;
+            if(min_len<ans)
+            {
+                ans=min_len;
+                start_index=start;
+            }
+            }
+        }
+        return s.substr(start_index,ans);
+    }

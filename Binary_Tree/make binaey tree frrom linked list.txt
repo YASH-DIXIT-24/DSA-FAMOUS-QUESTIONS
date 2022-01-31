@@ -1,0 +1,24 @@
+void convert(Node *head, TreeNode *&root) {
+    Node* curr=head;
+    vector<TreeNode*> tree;
+    while(curr!=NULL)
+    {
+        TreeNode *temp=new TreeNode(curr->data);
+        temp->left==NULL;
+        temp->right=NULL;
+        
+        tree.push_back(temp);
+        
+        curr=curr->next;
+    }
+    int n=tree.size();
+    for(int i=0;i<n/2;i++)
+    {
+        if(2*i+1<n)
+        tree[i]->left=tree[2*i+1];
+        if(2*i+2<n)
+        tree[i]->right=tree[2*i+2];
+    }
+    
+    root=tree[0];
+}

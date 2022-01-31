@@ -1,0 +1,25 @@
+int wordBreak(string a, vector<string> &b) {
+        
+        unordered_set<string> s;
+        for(auto k:b)
+        {
+            s.insert(k);
+        }
+        int n=a.size();
+        vector<bool> t(n+1);
+        
+        t[0]=true;
+        
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(t[j] && s.find(a.substr(j,i-j))!=s.end())
+                {
+                    t[i]=true;
+                    break;
+                }
+            }
+        }
+        return t[n];
+    }

@@ -1,0 +1,30 @@
+Node * removeDuplicates( Node *head) 
+    {
+      if(!head)
+      return head;
+      
+      
+      unordered_set<int> s;
+      Node* prev=head;
+      Node* curr=prev->next;
+      
+      if(!curr)
+      return head;
+      
+      s.insert(prev->data);
+      while(curr!=NULL)
+      {
+          if(s.find(curr->data)!=s.end())
+          {
+              prev->next=curr->next;
+              curr=curr->next;
+          }
+          else
+          {
+              s.insert(curr->data);
+              prev=curr;
+              curr=curr->next;
+          }
+      }
+      return head;
+    }

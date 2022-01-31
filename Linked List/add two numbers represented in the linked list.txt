@@ -1,0 +1,78 @@
+
+Node* reverse(Node* head)
+    {
+        Node* prev=NULL;
+        Node* next=NULL;
+        Node* curr=head;
+        
+        while(curr!=NULL)
+        {
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+Node* reverse(Node* head)
+    {
+        Node* prev=NULL;
+        Node* next=NULL;
+        Node* curr=head;
+        
+        while(curr!=NULL)
+        {
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        first=reverse(first);
+        second=reverse(second);
+        
+        
+        Node* res=NULL;
+        Node* prev=NULL;
+        int carry=0;
+        while(first || second)
+        {
+            int x=0;
+            x+=carry;
+            
+            if(first)
+            x=x+first->data;
+            
+            if(second)
+            x=x+second->data;
+            
+            Node* temp=new Node(x%10);
+            
+            carry=x/10;
+            
+            
+            if(!res)
+                res=temp;
+            else
+            {
+                prev->next=temp;
+            }
+            
+            prev=temp;
+            if(first)
+            first=first->next;
+            
+            if(second)
+            second=second->next;
+        }
+        if(carry)
+        {
+            Node* temp=new Node(carry);
+            prev->next=temp;
+        }
+        
+        return reverse(res);
+    }

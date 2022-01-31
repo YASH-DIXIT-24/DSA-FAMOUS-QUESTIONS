@@ -1,0 +1,29 @@
+Node* segregate(Node *head) {
+        
+    Node* curr=head;
+
+    Node* fill=head;
+    while(curr!=NULL)
+    {
+        if(curr->data==0)
+        {
+            curr->data=fill->data;
+            fill->data=0;
+            fill=fill->next;
+        }
+        curr=curr->next;
+    }
+    curr=fill;
+    while(curr!=NULL)
+    {
+        if(curr->data==1)
+        {
+            curr->data=fill->data;
+            fill->data=1;
+            fill=fill->next;
+        }
+        curr=curr->next;
+    }
+    return head;
+        
+    }

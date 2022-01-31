@@ -1,0 +1,57 @@
+Node* merge(Node* first, Node* second)
+    {
+        
+        Node* ans=NULL;
+        if(!first)
+        return second;
+        if(!second)
+        return first;
+        
+        if(first->data<=second->data)
+        {
+            ans=first;
+            ans->next=merge(first->next,second);
+        }
+        else
+        {
+            ans=second;
+            ans->next=merge(first,second->next);
+        }
+        return ans;
+    }
+    void find_middle(Node* curr, Node** first, Node** second)
+    {
+        Node* fast=curr;
+        Node* slow=curr;
+        Node* prev=NULL;
+        while(fast && fast->next)
+        {
+            fast=fast->next->next;
+            prev=slow;
+            slow=slow->next;
+        }
+        
+        *first=curr;
+        *second=slow;
+        
+        prev->next=NULL;
+    }
+    void mergy(Node **head)
+    {
+        Node* curr=*head;
+        Node* first;
+        Node* second;
+        if(!curr || !curr->next)
+        return;
+        
+        find_middle(curr,&first,&second);
+        
+        mergy(&first);
+        mergy(&second);
+        
+        *head=merge(first,second);
+    }
+    Node* mergeSort(Node* head) {
+        mergy(&head);
+        return head;
+    }

@@ -1,0 +1,24 @@
+vector<int> bfsOfGraph(int n, vector<int> adj[]) {
+         queue<int> q;
+         vector<int> bfs;
+         int vis[n];
+         memset(vis,0,sizeof(vis));
+         q.push(0);
+         vis[0]=1;
+         
+         while(!q.empty())
+         {
+             int x=q.front();
+             bfs.push_back(x);
+             q.pop();
+             for(auto j:adj[x])
+             {
+                 if(!vis[j])
+                 {
+                 q.push(j);
+                 vis[j]=1;
+                 }
+             }
+         }
+         return bfs;
+    }

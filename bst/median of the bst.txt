@@ -1,0 +1,42 @@
+void util(Node*root, int &len)
+{
+    if(!root)
+    return;
+    
+    util(root->left,len);
+    len++;
+    util(root->right,len);
+}
+void find_median(Node* root,int &med,bool isodd,int l,int &c)
+{
+    if(!root)
+    return;
+    
+   find_median(root->left,med,isodd,l,c);
+   c++;
+   if(c==(l/2+1))
+   med+=root->data;
+   else if(c==(l/2) && !isodd)
+   med+=root->data;
+   
+   find_median(root->right,med,isodd,l,c);
+}
+float findMedian(struct Node *root)
+{
+     int len=0;
+     bool isodd=true;
+     util(root,len);
+     int med=0;
+     int c=0;
+     if(len%2==0)
+     {
+     isodd=false;
+     find_median(root,med,isodd,len,c);
+     return (med/2.0);
+     }
+     else
+     {
+     find_median(root,med,isodd,len,c);
+     return med;
+     }
+}

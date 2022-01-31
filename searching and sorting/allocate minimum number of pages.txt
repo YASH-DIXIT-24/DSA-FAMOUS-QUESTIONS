@@ -1,0 +1,55 @@
+int check(int a[],int n,int m, int mid)
+    {
+        int stud_count=1,sum=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]>mid)
+              return false;
+            
+            if((sum+a[i])>mid)
+            {
+              stud_count++;
+              sum=a[i];
+              
+              if(stud_count>m)
+                return false;
+            }
+            else
+            {
+                sum+=a[i];
+            }
+            
+        }
+        
+        
+        
+        return true;
+         
+        
+    }
+    int findPages(int a[], int n, int m) 
+    {
+        int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=a[i];
+        }
+        int start=0, end=sum;
+        int ans=INT_MAX;
+        while(start<=end)
+        {
+            int mid=(start+end)/2;
+            
+            if(check(a,n,m,mid))
+            {
+                end=mid-1;
+                ans=min(ans,mid);
+            }
+                
+            else
+                start=mid+1;
+        }
+        return ans;
+        
+    }

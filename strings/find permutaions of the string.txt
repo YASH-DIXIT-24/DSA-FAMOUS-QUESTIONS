@@ -1,0 +1,21 @@
+void permute(int l,int r,string s,vector<string> &ans)
+		{
+		    if(l==r)
+		    {
+		    ans.push_back(s);
+		    return;
+		    }
+		    for(int i=l;i<=r;i++)
+		    {
+		        swap(s[l],s[i]);
+		        permute(l+1,r,s,ans);
+		        swap(s[l],s[i]);
+		    }
+		}
+		vector<string>find_permutation(string s)
+		{
+		    vector<string> ans;
+		    permute(0,s.size()-1,s,ans);
+		    sort(ans.begin(),ans.end());
+		    return ans;
+		}

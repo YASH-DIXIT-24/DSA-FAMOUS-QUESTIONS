@@ -1,0 +1,28 @@
+void merge(long long a1[], long long a2[], int n, int m) 
+        { 
+            long long int i=0;
+            long long int j=0;
+            
+            while(i<n)
+            {
+             if(a1[i]<=a2[j])
+             {
+                 i++;
+             }
+             else
+             {
+                long long temp=a1[i];
+                a1[i]=a2[j];
+                a2[j]=temp;
+                i++;
+                
+                
+                for(int k=0;k<m-1;k++)
+                {
+                    if(a2[k+1]<a2[k])
+                    swap(a2[k+1],a2[k]);
+                }
+             }
+             
+            }
+        } 

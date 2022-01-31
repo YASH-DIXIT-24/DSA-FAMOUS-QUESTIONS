@@ -1,0 +1,70 @@
+void merge(vector<int> &ans,int l,int mid ,int r)
+    {
+        int n1=mid-l+1;
+        int n2=r-mid;
+        
+        int a[n1],b[n2];
+        
+        for(int i=0;i<n1;i++)
+        {
+            a[i]=ans[l+i];
+        }
+        for(int i=0;i<n2;i++)
+        {
+            b[i]=ans[mid+1+i];
+        }
+        
+        int i,j,k;
+        i=0;
+        j=0;
+        k=l;
+        
+        while(i<n1 && j<n2)
+        {
+            if(a[i]<=b[j])
+            {
+              ans[k]=a[i];
+              i++;
+            }
+            else
+            {
+                ans[k]=b[j];
+                j++;
+            }
+            k++;
+        }
+        while(i<n1)
+        {
+            ans[k]=a[i];
+            i++;
+            k++;
+        }
+        while(j<n2)
+        {
+            ans[k]=b[j];
+            j++;
+            k++;
+        }
+    }
+    void inorder(Node *root,vector<int> &ans)
+    {
+        if(!root)
+        return;
+        
+        inorder(root->left,ans);
+        ans.push_back(root->data);
+        inorder(root->right,ans);
+        
+    }
+    vector<int> merge(Node *root1, Node *root2)
+    {
+        vector<int> ans;
+        
+        inorder(root1,ans);
+        
+        int mid=ans.size()-1;
+        inorder(root2,ans);
+        int r=ans.size()-1;
+        merge(ans,0,mid,r);
+        return ans;
+    }

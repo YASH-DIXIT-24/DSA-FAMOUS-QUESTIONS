@@ -1,0 +1,22 @@
+int bs(int low,int high,int a[])
+    {
+       if(low>high)
+       return a[0];
+       
+       if(low==high)
+       return a[low];
+       
+       int mid=(low+high)/2;
+       
+       if(mid<high && a[mid]<a[mid-1])
+       return a[mid];
+       
+       if(a[high]<a[mid])
+       return  bs(mid+1,high,a);
+       
+       return bs(low,mid-1,a);
+       
+    }
+    int findMin(int arr[], int n){
+        return bs(0,n-1,arr);
+    }

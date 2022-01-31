@@ -1,0 +1,62 @@
+//aggressive cows spoj solution
+
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long int ll;
+
+
+bool check(ll x,ll a[],ll n,ll c)
+{
+
+    ll prev=a[0];
+	ll count=1;
+	for(ll i=1;i<n;i++)
+	{
+		if((a[i]-prev)>=x)
+		{
+			count++;
+			prev=a[i];
+		}
+	}
+	return count>=c;
+
+}
+
+int main() 
+{
+	ll t,n,c;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n >>c;
+
+        ll a[n];
+		for(ll i=0;i<n;i++)
+		{
+          cin>>a[i];
+		}
+		sort(a,a+n);
+        
+		
+        ll low=a[0];
+		ll high=1e9;
+        ll ans;
+		while(low<=high)
+		{
+			ll mid=(low+high)/2;
+
+			if(check(mid,a,n,c))
+			{
+			ans=mid;
+			low=mid+1;
+			}
+			else
+			high=mid-1;
+		}
+		cout<<ans<<'\n';
+		
+	
+	}
+
+}

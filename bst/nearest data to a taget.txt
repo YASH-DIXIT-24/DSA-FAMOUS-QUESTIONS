@@ -1,0 +1,16 @@
+	void util(Node* root,int k,int &min_dif)
+	{
+	    if(!root)
+	    return;
+	    
+	    min_dif=min(min_dif,abs(root->data-k));
+	    util(root->left,k,min_dif);
+	    util(root->right,k,min_dif);
+	    
+	}
+    int minDiff(Node *root, int k)
+    {
+        int min_dif=INT_MAX;
+        util(root,k,min_dif);
+        return min_dif;
+    }

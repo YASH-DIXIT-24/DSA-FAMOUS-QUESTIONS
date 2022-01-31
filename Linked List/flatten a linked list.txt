@@ -1,0 +1,31 @@
+Node* merge(Node* first,Node* second)
+{
+    if(!first)
+    return second;
+    if(!second)
+    return first;
+    Node* temp;
+    if(first->data<=second->data)
+    {
+        temp=first;
+        temp->bottom=merge(first->bottom,second);
+    }
+    else
+    {
+        temp=second;
+        temp->bottom=merge(first,second->bottom);
+    }
+    return temp;
+    
+}
+Node *flatten(Node *root)
+{
+   Node* first=NULL;
+   Node* second=root;
+   while(second!=NULL)
+   {
+       first=merge(first,second);
+       second=second->next;
+   }
+   return first;
+}

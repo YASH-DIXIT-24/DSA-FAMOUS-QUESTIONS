@@ -1,0 +1,37 @@
+int dfs(vector<vector<char>> m,int r,int c,string t,int x,int z ,int y,int i)
+    {
+        int found=0;
+        if(r>=0 && c>=0 && r<z && c<y  && t[i]==m[r][c] )
+        {
+            
+            int temp=m[r][c];
+            m[r][c]=0;
+            i++;
+            if(i==x)
+            found=1;
+            else
+            {
+                
+                found+=dfs(m,r+1,c,t,x,z,y,i);
+                found+=dfs(m,r,c+1,t,x,z,y,i);
+                found+=dfs(m,r-1,c,t,x,z,y,i);
+                found+=dfs(m,r,c-1,t,x,z,y,i);
+                
+            }
+            m[r][c]=temp;
+        }
+        return found;
+    }
+    int findOccurrence(vector<vector<char> > &mat, string target)
+    {
+        int n=mat.size();
+        int m=mat[0].size();
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            ans+=dfs(mat,i,j,target,target.size(),n,m,0);
+        }
+        return ans;
+        
+    }

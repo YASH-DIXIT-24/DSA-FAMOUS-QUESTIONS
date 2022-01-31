@@ -1,0 +1,30 @@
+Node* findIntersection(Node* head1, Node* head2)
+    {
+        unordered_set<int> p;
+        Node* prev=NULL;
+        Node* res=NULL;
+        while(head2)
+        {
+            p.insert(head2->data);
+            head2=head2->next;
+        }
+        while(head1)
+        {
+            if(p.find(head1->data)!=p.end())
+            {
+                Node* temp=new Node(head1->data);
+                if(!res)
+                {
+                res=temp;
+                prev=temp;
+                }
+                else
+                {
+                    prev->next=temp;
+                    prev=temp;
+                }
+            }
+            head1=head1->next;
+        }
+        return res;
+    }

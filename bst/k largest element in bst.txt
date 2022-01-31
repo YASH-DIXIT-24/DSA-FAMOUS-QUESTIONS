@@ -1,0 +1,26 @@
+void util(Node* root,int &k,int &val)
+    {
+        if(!root)
+        return;
+        
+        util(root->right,k,val);
+        
+        
+        k--;
+        if(k==0)
+        {
+            val=root->data;
+            return;
+        }
+        
+            
+        util(root->left,k,val);
+        
+    }
+    int kthLargest(Node *root, int K)
+    {
+        int val=-1;
+        util(root,K,val);
+        return val;
+        
+    }

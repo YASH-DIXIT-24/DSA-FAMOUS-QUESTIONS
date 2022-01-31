@@ -1,0 +1,23 @@
+class Solution
+{
+    public:
+    void  util( Node* root,int &sum)
+    {
+        if(!root)
+        return;
+        
+        util(root->right,sum);
+        
+        int x=root->data;
+        root->data=sum;
+        sum=sum+x;
+        
+        util(root->left,sum);
+    }
+    
+    void transformTree(struct Node *root)
+    {
+        int sum=0;
+        util(root,sum);
+    }
+};

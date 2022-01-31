@@ -1,0 +1,18 @@
+int tosum(Node *root)
+    {
+        if(!root)
+        return 0;
+        
+        int lsum=tosum(root->left);
+        int rsum=tosum(root->right);
+        
+        int val=root->data+lsum+rsum;
+        
+        root->data=lsum+rsum;
+        
+        return val;
+    }
+    void toSumTree(Node *node)
+    {
+        tosum(node);
+    }

@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+#define fl(i, n) for (ll i = 0; i < (n); ++i)
+typedef long long  ll;
+
+int main() {
+	//code
+	ll t,n,k;
+	
+	cin>>t;
+	while(t--)
+	{
+
+	    cin>>n >>k;
+	    ll a[n];
+	    
+	    fl(i,n)
+	    {
+	        cin>>a[i] ;
+	    }
+	    vector<ll> ans;
+	    priority_queue<ll, vector<ll>, greater<ll> > m;
+	    fl(i,n)
+	    {
+	        m.push(a[i]);
+	        if(m.size()==k)
+	        {
+	            ans.push_back(m.top());
+	            m.pop();
+	        }
+	        
+	    }
+	    while(m.size())
+	    {
+	        ans.push_back(m.top());
+	        m.pop();
+	    }
+	    
+	    for(auto j:ans)
+	    cout<<j<<" ";
+	    
+	    
+	    cout<<'\n';
+	    
+	}
+	
+	return 0;
+}

@@ -1,0 +1,53 @@
+class Solution
+{
+  public:
+  
+    bool check(int a[],int  n ,int  k,long long int mid)
+    {
+        long long int sum=0,painter_count=1;
+       
+        for(long long int i=0;i<n;i++)
+        {
+            if(a[i]>mid)
+            return false;
+            
+            if(sum+a[i]>mid)
+            {
+                painter_count++;
+                sum=a[i];
+                
+                if(painter_count>k)
+                  return false;
+            }
+            else
+            {
+                sum+=a[i];
+            }
+        }
+        return true;
+    }
+    long long minTime(int a[], int n, int k)
+    {
+      long long int sum=0;
+      for(long long int i=0;i<n;i++)
+      {
+          sum+=a[i];
+      }
+      
+      long long int start=0, end=sum;
+      long long int ans=INT_MAX;
+      while(start<=end)
+      {
+          long long int mid=(start+end)/2;
+          
+          if(check(a,n,k,mid))
+          {
+             end=mid-1;
+             ans=min(ans,mid);
+          }
+          else
+             start=mid+1;
+             
+      }
+      return ans;
+    }

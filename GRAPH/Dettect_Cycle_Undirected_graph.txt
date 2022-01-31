@@ -1,0 +1,31 @@
+ int vis[100001];
+    bool dfs(int node,int par,vector<int> g[])
+    {
+        vis[node]=1;
+        for(auto child:g[node])
+        {
+           if(!vis[child])
+           {
+           if(dfs(child,node,g)==true)
+           return true;
+           }
+           else 
+           {
+           if(child!=par)
+           return true;
+           }
+        }
+        return false;
+    }
+    bool isCycle(int n, vector<int> adj[]) 
+    {
+       
+        for(long long i=0;i<n;i++)
+        {
+        memset(vis,0,sizeof(vis));
+        if(dfs(i,-1,adj))
+        return true;
+        }
+        return false;
+    
+    }

@@ -1,0 +1,28 @@
+bool util(Node* root,int &lh,int level)
+    {
+        if(!root)
+        return true;
+        
+        
+        if(!root->left && !root->right)
+        {
+            if(lh==0)
+            {
+                lh=level;
+            }
+            else
+            {
+                return lh==level;
+            }
+        }
+        
+        
+        return util(root->left,lh,level+1) && util(root->right,lh,level+1);
+    }
+    bool check(Node *root)
+    {
+        if(!root)
+        return true;
+        int lh=0;
+        return util(root,lh,0);
+    }

@@ -1,0 +1,46 @@
+ void push_left(Node* root,stack<Node*> &s)
+    {
+        while(root!=NULL)
+        {
+            s.push(root);
+            root=root->left;
+        }
+    }
+    void push_right(Node* root,stack<Node*> &s)
+    {
+        while(root!=NULL)
+        {
+            s.push(root);
+            root=root->right;
+        }
+    }
+    int isPairPresent(struct Node *root, int target)
+    {
+       stack<Node*> s1,s2;
+       
+       push_left(root,s1);
+       push_right(root,s2);
+       
+       while(s1.top()->data<s2.top()->data && !s1.empty() && !s2.empty())
+       {
+       
+       if(s1.top()->data+s2.top()->data==target)
+       return 1;
+       
+       if(s1.top()->data+s2.top()->data<target)
+       {
+           Node* temp=s1.top();
+           s1.pop();
+           push_left(temp->right,s1);
+       }
+       else
+       {
+           Node* temp=s2.top();
+           s2.pop();
+           push_right(temp->left,s2);
+       }
+       
+       }
+       return 0;
+       
+    }

@@ -1,0 +1,24 @@
+vector <int> max_of_subarrays(int *arr, int n, int k)
+    {
+        priority_queue<int> pq;
+        priority_queue<int> drop;
+        vector<int>ans;
+        for(int i=0;i<k;i++)
+        {
+            pq.push(arr[i]);
+        }
+        ans.push_back(pq.top());
+        for(int i=k;i<n;i++)
+        {
+            
+            drop.push(arr[i-k]);
+            while(!drop.empty() && drop.top()==pq.top())
+            {
+                drop.pop();
+                pq.pop();
+            }
+            pq.push(arr[i]);
+            ans.push_back(pq.top());
+        }
+        return ans;
+    }

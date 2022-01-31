@@ -1,0 +1,8 @@
+ priority_queue<int> m;
+        for(int i=l;i<=r;i++)
+        {
+            m.push(arr[i]);
+            if(m.size()>k)
+            m.pop();
+        }
+        return m.top();

@@ -1,0 +1,49 @@
+struct compare {
+    bool operator()(struct Node* a, struct Node* b)
+    {
+        return a->data > b->data;
+    }
+};
+Node *sortedDll(Node *head, int k)
+{
+    priority_queue<Node*,vector<Node*>,compare> pq;
+    Node* curr=head;
+    Node* head2=NULL;
+    Node* prev=NULL;
+   
+    while(curr)
+    {
+        if(pq.size()==(k+1))
+        {
+            Node* temp=pq.top();
+            
+            pq.pop();
+            if(!head2)
+            {
+                head2=temp;
+                prev=head2;
+            }
+            else
+            {
+                prev->next=temp;
+                temp->prev=prev;
+                prev=temp;
+            }
+        }
+        else
+        {
+            pq.push(curr);
+            curr=curr->next;
+        }
+    }
+    while(!pq.empty())
+    {
+        Node* temp=pq.top();
+        prev->next=temp;
+        temp->prev=prev;
+        prev=temp;
+        pq.pop();
+    }
+    prev->next=NULL;
+    return head2;
+}

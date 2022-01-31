@@ -1,0 +1,61 @@
+bool issafe(int x,int y,int n)
+    {
+        if(x>=1 && x<=n && y>=1 && y<=n)
+        return true;
+        
+        return false;
+    }
+    //Function to find out minimum steps Knight needs to reach target position.
+	int minStepToReachTarget(vector<int>&KnightPos,vector<int>&TargetPos,int n)
+	{
+	    int x,y,a,b,currx,curry;
+	    x=KnightPos[0];
+	    y=KnightPos[1];
+	    a=TargetPos[0];
+	    b=TargetPos[1];
+	    int dx[] = { -2, -1, 1, 2, -2, -1, 1, 2 };
+        int dy[] = { -1, -2, -2, -1, 1, 2, 2, 1 };
+        
+	    int vis[n+1][n+1];
+	    int dist[n+1][n+1];
+	    memset(vis,0,sizeof(vis));
+	    memset(dist,0,sizeof(dist));
+	    
+	    
+	    
+	    queue<pair<int,int>> q;
+	    while(!q.empty())
+	    {
+	        q.pop();
+	    }
+	  
+	    q.push({x,y});
+	    
+	    vis[x][y]=1;
+	    dist[x][y]=0;
+	    
+	    if(x==a && y==b)
+	    return 0;
+	    
+	    while(!q.empty())
+	    {
+	        currx=q.front().first;
+	        curry=q.front().second;
+	        q.pop();
+	        
+	        
+	        if(currx==a && curry==b)
+	        return dist[currx][curry];
+	        for(int i=0;i<8;i++)
+	        {
+	            if(issafe(currx+dx[i],curry+dy[i],n) && !vis[currx+dx[i]][curry+dy[i]])
+	            {
+	                q.push({currx+dx[i],curry+dy[i]});
+	                dist[currx+dx[i]][curry+dy[i]]=dist[currx][curry]+1;
+	                
+	                vis[currx+dx[i]][curry+dy[i]]=1;
+	            }
+	        }
+	    }
+	    
+	}

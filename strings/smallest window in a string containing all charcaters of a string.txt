@@ -1,0 +1,48 @@
+string smallestWindow (string s, string p)
+    {
+        int n=s.size();
+        int m=p.size();
+        int count1[256]={0};
+        int count2[256]={0};
+        
+        for(int i=0;i<m;i++)
+        {
+            count1[p[i]]++;
+        }
+        int k=0;
+        int start=0;
+        int ans=INT_MAX;
+        int start_index=-1;
+        for(int i=0;i<n;i++)
+        {
+            count2[s[i]]++;
+            if(count2[s[i]]<=count1[s[i]])
+            {
+                k++;
+            }
+            if(k==m)
+            {
+                while(count2[s[start]]>count1[s[start]])
+                {
+                    if(count2[s[start]]>count1[s[start]])
+                    {
+                        count2[s[start]]--;
+                        start++;
+                    }
+                    
+                }
+                
+                int min_len=i-start+1;
+                if(min_len<ans)
+                {
+                    ans=min_len;
+                    start_index=start;
+                }
+            }
+            
+        }
+        if(start_index==-1)
+            return"-1";
+        else
+            return s.substr(start_index,ans);
+    }
